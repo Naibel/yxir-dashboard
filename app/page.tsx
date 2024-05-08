@@ -1,9 +1,22 @@
+"use client";
+
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+import ResponsiveAddRemove from "@/components/GridLayout";
+import AlertProvider from "@/providers/AlertProvider";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <h1>Yxir Dashboard</h1>
-      </div>
-    </main>
+    <AlertProvider>
+      <main className="p-10 h-screen">
+        <div className="">
+          <h1>Yxir Dashboard</h1>
+        </div>
+        <div>
+          <ResponsiveAddRemove />
+        </div>
+      </main>
+    </AlertProvider>
   );
 }
