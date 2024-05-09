@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import { Widget } from "./Widget";
+import BarChart from "../BarChart/BarChart";
+import LineChart from "../LineChart/LineChart";
+import PieChart from "../PieChart/PieChart";
+import { Widget } from "../Widget/Widget";
 
 import { useAlertStore } from "@/hooks";
 import { Cols, Item, LayoutType } from "@/types/types";
@@ -45,8 +48,8 @@ const GridLayout = ({
 
     return (
       <div key={i} data-grid={item}>
-        <Widget key={i} onRemove={onRemoveItem}>
-          {i}
+        <Widget index={i} onRemove={onRemoveItem}>
+          <PieChart />
         </Widget>
       </div>
     );

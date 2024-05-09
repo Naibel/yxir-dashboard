@@ -2,11 +2,11 @@ import { ReactNode } from "react";
 import { IoClose } from "react-icons/io5";
 
 export const Widget = ({
-  key,
+  index,
   onRemove,
   children,
 }: {
-  key: string;
+  index: string;
   onRemove: (i: string) => void;
   children: ReactNode;
 }) => (
@@ -22,7 +22,7 @@ export const Widget = ({
         top: "10px",
         cursor: "pointer",
       }}
-      onClick={() => onRemove(key)}
+      onClick={() => onRemove(index)}
     >
       <IoClose className="opacity-50 hover:opacity-100" />
     </span>
