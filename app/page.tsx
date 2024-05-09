@@ -3,20 +3,20 @@
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 
-import ResponsiveAddRemove from "@/components/GridLayout";
-import AlertProvider from "@/providers/AlertProvider";
+import GridLayout from "@/components/GridLayout/GridLayout";
+import withProviders from "@/providers/withProviders.hoc";
 
-export default function Home() {
+const Home = () => {
   return (
-    <AlertProvider>
-      <main className="p-10 h-screen">
-        <div className="">
-          <h1>Yxir Dashboard</h1>
-        </div>
-        <div>
-          <ResponsiveAddRemove />
-        </div>
-      </main>
-    </AlertProvider>
+    <main className="p-10 h-screen">
+      <div className="">
+        <h1>Yxir Dashboard</h1>
+      </div>
+      <div>
+        <GridLayout />
+      </div>
+    </main>
   );
-}
+};
+
+export default withProviders(Home);
