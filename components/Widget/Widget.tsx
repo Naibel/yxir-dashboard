@@ -1,30 +1,30 @@
 import { ReactNode } from "react";
 import { IoClose } from "react-icons/io5";
 
-export const Widget = ({
-  index,
-  onRemove,
-  children,
-}: {
+type WidgetProps = {
+  title: string;
   index: string;
   onRemove: (i: string) => void;
   children: ReactNode;
-}) => (
-  <div className="bg-white p-5 h-full rounded-lg shadow-lg cursor-grab">
-    <span className="text">Widget</span>
-    {children}
-    <span
-      className="remove"
-      style={{
-        zIndex: 10,
-        position: "absolute",
-        right: "10px",
-        top: "10px",
-        cursor: "pointer",
-      }}
-      onClick={() => onRemove(index)}
-    >
-      <IoClose className="opacity-50 hover:opacity-100" />
-    </span>
+};
+
+export const Widget = ({ title, index, onRemove, children }: WidgetProps) => (
+  <div className="flex flex-col box-sizing bg-white p-5 h-full shadow-indigo-100 rounded-xl shadow-lg hover:shadow-xl duration-300 cursor-grab">
+    <div className="flex">
+      <span className="text flex-1 text-lg font-bold">{title}</span>
+      <span
+        className="remove"
+        style={{
+          cursor: "pointer",
+          zIndex: 50,
+        }}
+        onClick={() => {
+          onRemove(index);
+        }}
+      >
+        <IoClose size={20} className="opacity-50 hover:opacity-100" />
+      </span>
+    </div>
+    <div className="h-full overflow-auto ">{children}</div>
   </div>
 );
