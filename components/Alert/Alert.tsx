@@ -16,9 +16,9 @@ const Alert = ({
     <div
       className={`flex w-fit m-auto gap-5 items-center rounded-md shadow-lg p-5 ${styles[type]} `}
     >
-      <span>{message}</span>
+      <span className="text-white">{message}</span>
       <IoClose
-        className="duration-300 cursor-pointer hover:bg-red-700 active:bg-red-800 rounded-full"
+        className="duration-300 text-white cursor-pointer hover:bg-red-700 active:bg-red-800 rounded-full"
         onClick={onClose}
         size={30}
       />
