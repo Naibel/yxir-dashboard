@@ -13,6 +13,7 @@ export type Item = {
   w: number;
   h: number;
   add?: boolean;
+  type: ChartType;
 };
 
 export type LayoutType = {
@@ -21,4 +22,34 @@ export type LayoutType = {
   w: number;
   h: number;
   i: string;
+};
+
+export type ChartType = "pie" | "bar" | "line" | "table";
+
+export type TableData = {
+  name: string;
+  quantity: number;
+  data: string;
+  progress: number;
+};
+
+export type ColumnDef = {
+  header: string;
+  accessorKey: string;
+  footer: string;
+  cell?: (props: any) => ReactNode;
+};
+
+export type DataDef = {
+  id: number;
+  product_name: string;
+  quantity: number;
+  manufacturing_date: string;
+  expiration_date: string;
+  manufacturer: string;
+  batch_number: number;
+  storage_temperature: number;
+  location: string;
+  supplier: string;
+  price: number;
 };
