@@ -100,12 +100,12 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
                         header.getContext()
                       )}
                     </span>
-                    {
-                      {
-                        asc: <TiArrowSortedUp size={20} />,
-                        desc: <TiArrowSortedDown size={20} />,
-                      }[header.column.getIsSorted() ?? null]
-                    }
+                    {header.column.getIsSorted() === "asc" && (
+                      <TiArrowSortedDown size={20} />
+                    )}
+                    {header.column.getIsSorted() === "desc" && (
+                      <TiArrowSortedUp size={20} />
+                    )}
                   </div>
                 </th>
               ))}
