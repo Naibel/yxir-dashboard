@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
 import BarChart from "@/components/BarChart/BarChart";
+import { LayoutPlaceholder } from "@/components/LayoutPlacehoder/LayoutPlaceholder";
 import LineChart from "@/components/LineChart/LineChart";
 import Menu from "@/components/Menu/Menu";
 import PieChart from "@/components/PieChart/PieChart";
@@ -10,7 +11,7 @@ import { Widget } from "@/components/Widget/Widget";
 import { useAlertStore } from "@/hooks";
 import { columnsData } from "@/mocks/columnsData";
 import mockData from "@/mocks/MOCK_DATA.json";
-import { ChartType, Cols, Item, LayoutType } from "@/types/types";
+import { ChartType, Cols, Item, LayoutType } from "@/types";
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
@@ -138,17 +139,23 @@ const GridLayout = ({
   );
 
   return (
-    <div>
+    <div className={grids.length === 0 ? `flex flex-1` : ""}>
       <Menu onAddItem={onAddItem} />
-      <ResponsiveGridLayout
-        onLayoutChange={onLayoutChangeHandler}
-        onBreakpointChange={onBreakpointChange}
-        className={className}
-        cols={cols}
-        rowHeight={rowHeight}
-      >
-        {grids}
-      </ResponsiveGridLayout>
+      {grids.length > 0 ? (
+        <ResponsiveGridLayout
+          draggableHandle=".allowGrab"
+          draggableCancel=".cancelGrab"
+          onLayoutChange={onLayoutChangeHandler}
+          onBreakpointChange={onBreakpointChange}
+          className={className}
+          cols={cols}
+          rowHeight={rowHeight}
+        >
+          {grids}
+        </ResponsiveGridLayout>
+      ) : (
+        <LayoutPlaceholder />
+      )}
     </div>
   );
 };
