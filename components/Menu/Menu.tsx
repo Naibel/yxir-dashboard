@@ -4,7 +4,7 @@ import { FaChartBar, FaChartLine, FaChartPie, FaTable } from "react-icons/fa";
 import AddButton from "./AddButton";
 import ChartButton from "./ChartButton";
 
-import { ChartType } from "@/types/types";
+import { ChartType } from "@/types";
 
 const Menu = ({ onAddItem }: { onAddItem: (type: ChartType) => void }) => {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);

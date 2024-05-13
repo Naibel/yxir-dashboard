@@ -1,4 +1,4 @@
-import { ColumnDef } from "@/types/types";
+import { ColumnDef } from "@/types";
 
 export const columnsData: ColumnDef[] = [
   {
