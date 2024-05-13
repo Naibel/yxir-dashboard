@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { IoSearchSharp } from "react-icons/io5";
 import {
   MdFirstPage,
   MdLastPage,
@@ -20,6 +19,9 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table";
+
+import PaginationButton from "./PaginationButton";
+import SearchBar from "./SearchBar";
 
 import { ColumnDef } from "@/types";
 
@@ -65,25 +67,47 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
   });
 
   return (
-    <div className="flex gap-5 flex-col items-start">
-      <div className="flex gap-2 border-2 rounded-full pl-2 pr-5 py-1">
-        <IoSearchSharp
-          size={24}
-          color="#aaa"
-          className="duration-300 opacity-70 hover:opacity-100 cursor-pointer"
-        />
-        <input
-          className="bg-grey "
-          type="text"
-          placeholder="Rechercher dans le tableau"
+    <div className="flex pt-4 gap-5 flex-col overflow-auto">
+      <div className="flex justify-between">
+        <SearchBar
           value={filtering}
           onChange={(e) => {
             setFiltering(e.target.value);
           }}
         />
+        <div className="flex items-center">
+          <PaginationButton
+            tooltip={{ id: "first-page", content: "Première page" }}
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.setPageIndex(0)}
+            Icon={MdFirstPage}
+          />
+          <PaginationButton
+            tooltip={{ id: "previous-page", content: "Page précédente" }}
+            disabled={!table.getCanPreviousPage()}
+            onClick={() => table.previousPage()}
+            Icon={MdNavigateBefore}
+          />
+          <span>
+            Page {table.getState().pagination.pageIndex + 1} sur{" "}
+            {table.getPageCount()}
+          </span>
+          <PaginationButton
+            tooltip={{ id: "next-page", content: "Page suivante" }}
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.nextPage()}
+            Icon={MdNavigateNext}
+          />
+          <PaginationButton
+            tooltip={{ id: "last-page", content: "Dernière page" }}
+            disabled={!table.getCanNextPage()}
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            Icon={MdLastPage}
+          />
+        </div>
       </div>
 
-      <table className="cancelGrab w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <table className="overflow-auto cancelGrab w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           {table.getHeaderGroups().map((headerGroup: HeaderGroup<T>) => (
             <tr key={headerGroup.id}>
@@ -127,32 +151,6 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
           ))}
         </tbody>
       </table>
-      <div className="flex items-center">
-        <button
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.setPageIndex(0)}
-        >
-          <MdFirstPage size={30} />
-        </button>
-        <button
-          disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}
-        >
-          <MdNavigateBefore size={30} />
-        </button>
-        <button
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}
-        >
-          <MdNavigateNext size={30} />
-        </button>
-        <button
-          disabled={!table.getCanNextPage()}
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-        >
-          <MdLastPage size={30} />
-        </button>
-      </div>
     </div>
   );
 }
