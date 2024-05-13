@@ -1,14 +1,13 @@
 import { useMemo, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import BarChart from "@/components/BarChart/BarChart";
-import { LayoutPlaceholder } from "@/components/LayoutPlacehoder/LayoutPlaceholder";
-import LineChart from "@/components/LineChart/LineChart";
-import Menu from "@/components/Menu/Menu";
-import PieChart from "@/components/PieChart/PieChart";
-import Table from "@/components/Table/Table";
-import { Widget } from "@/components/Widget/Widget";
+import { Chart, LayoutPlaceholder, Menu, Table, Widget } from "@/components";
 import { useAlertStore } from "@/hooks";
+import {
+  barChartConfig,
+  lineChartConfig,
+  pieChartConfig,
+} from "@/mocks/chartConfigs";
 import { columnsData } from "@/mocks/columnsData";
 import mockData from "@/mocks/MOCK_DATA.json";
 import { ChartType, Cols, Item, LayoutType } from "@/types";
@@ -18,15 +17,15 @@ const ResponsiveGridLayout = WidthProvider(Responsive);
 const getComponent = (chart: ChartType) => {
   switch (chart) {
     case "pie":
-      return <PieChart />;
+      return <Chart config={pieChartConfig} />;
     case "bar":
-      return <BarChart />;
+      return <Chart config={barChartConfig} />;
     case "line":
-      return <LineChart />;
+      return <Chart config={lineChartConfig} />;
     case "table":
       return <Table tableData={mockData} columnsData={columnsData} />;
     default:
-      return <Table tableData={mockData} columnsData={columnsData} />;
+      return <div></div>;
   }
 };
 
@@ -48,8 +47,8 @@ const chartData = {
   },
   table: {
     title: "Tableau",
-    w: 6,
-    h: 4,
+    w: 12,
+    h: 5,
   },
 };
 
@@ -70,9 +69,9 @@ const GridLayout = ({
 
   const [items, setItems] = useState<Item[]>([]);
   const [newCounter, setNewCounter] = useState(items.length);
-  // const [breakpoint, setBreakpoint] = useState(0);
+  const [breakpoint, setBreakpoint] = useState();
   const [currentCols, setCurrentCols] = useState(0);
-  // const [layout, setLayout] = useState(0);
+  const [layout, setLayout] = useState();
 
   const createElement = (item: Item) => {
     return (
@@ -93,7 +92,6 @@ const GridLayout = ({
     console.log("adding", "n" + newCounter);
 
     if (newCounter < 10) {
-      // Add a new item. It must have a unique key!
       setItems((prevState: Item[]) => {
         const newEntry: Item = {
           i: "n" + newCounter,
@@ -123,13 +121,13 @@ const GridLayout = ({
 
   // We're using the cols coming back from this to calculate where to add new items.
   const onBreakpointChange = (breakpoint: any, cols: any) => {
-    // setBreakpoint(breakpoint);
+    setBreakpoint(breakpoint);
     setCurrentCols(cols);
   };
 
   const onLayoutChangeHandler = (layout: any) => {
     onLayoutChange && onLayoutChange(layout);
-    // setLayout(layout);
+    setLayout(layout);
   };
 
   const grids = useMemo(
@@ -139,10 +137,12 @@ const GridLayout = ({
   );
 
   return (
-    <div className={grids.length === 0 ? `flex flex-1` : ""}>
+    <div className={`p-4 md:p-10 ${grids.length === 0 ? `flex flex-1` : ""}`}>
       <Menu onAddItem={onAddItem} />
       {grids.length > 0 ? (
         <ResponsiveGridLayout
+          margin={[20, 20]}
+          containerPadding={[0, 0]}
           draggableHandle=".allowGrab"
           draggableCancel=".cancelGrab"
           onLayoutChange={onLayoutChangeHandler}
