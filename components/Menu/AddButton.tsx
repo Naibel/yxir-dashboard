@@ -1,7 +1,11 @@
 import { FaPlus } from "react-icons/fa6";
 import { Tooltip } from "react-tooltip";
 
-const AddButton = ({ onClick }: { onClick: () => void }) => (
+type AddButtonProps = {
+  onClick: () => void;
+};
+
+const AddButton = ({ onClick }: AddButtonProps) => (
   <div className="bottom-10 right-10 z-30">
     <a
       data-tooltip-id="add-button-tooltip"

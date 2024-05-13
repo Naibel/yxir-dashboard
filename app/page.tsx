@@ -7,8 +7,8 @@ import withProviders from "@/providers/withProviders.hoc";
 import GridLayout from "@/views/GridLayout";
 
 const Home = () => (
-  <main className="p-4 md:p-10 flex flex-col h-screen">
-    <div className="pb-4">
+  <main className="flex flex-col h-screen">
+    <div className="px-4 pt-4 md:px-10 md:pt-10">
       <h1 className="text-3xl text-indigo-950 font-bold">My Dashboard</h1>
     </div>
     <GridLayout />

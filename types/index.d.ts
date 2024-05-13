@@ -12,7 +12,6 @@ export type Item = {
   y: number;
   w: number;
   h: number;
-  add?: boolean;
   type: ChartType;
 };
 
@@ -25,13 +24,6 @@ export type LayoutType = {
 };
 
 export type ChartType = "pie" | "bar" | "line" | "table";
-
-export type TableData = {
-  name: string;
-  quantity: number;
-  data: string;
-  progress: number;
-};
 
 export type ColumnDef = {
   header: string;

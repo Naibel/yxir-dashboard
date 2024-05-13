@@ -1,5 +1,3 @@
-"use client";
-
 import AlertProvider from "@/providers/AlertProvider";
 
 const withProviders = (WrappedComponent: React.ComponentType) => {
