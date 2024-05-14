@@ -46,7 +46,7 @@ const Widget = ({ title, index, onRemove, children }: WidgetProps) => {
           />
         </a>
       </div>
-      <div className="h-full px-5 pb-5">{children}</div>
+      <div className="h-full px-5 pb-5 overflow-auto">{children}</div>
     </div>
   );
 };

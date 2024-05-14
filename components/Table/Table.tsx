@@ -67,7 +67,7 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
   });
 
   return (
-    <div className="flex pt-4 gap-5 flex-col overflow-auto">
+    <div className="flex pt-4 gap-5 flex-col w-full">
       <div className="flex justify-between">
         <SearchBar
           value={filtering}
@@ -107,50 +107,52 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
         </div>
       </div>
 
-      <table className="overflow-auto cancelGrab w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          {table.getHeaderGroups().map((headerGroup: HeaderGroup<T>) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header: Header<T, unknown>) => (
-                <th
-                  className="text-left px-6 py-3"
-                  key={header.id}
-                  onClick={header.column.getToggleSortingHandler()}
-                >
-                  <div className="flex items-center">
-                    <span>
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+      <div className="overflow-auto">
+        <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            {table.getHeaderGroups().map((headerGroup: HeaderGroup<T>) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header: Header<T, unknown>) => (
+                  <th
+                    className="text-left px-6 py-3"
+                    key={header.id}
+                    onClick={header.column.getToggleSortingHandler()}
+                  >
+                    <div className="flex items-center">
+                      <span>
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                      </span>
+                      {header.column.getIsSorted() === "asc" && (
+                        <TiArrowSortedDown size={20} />
                       )}
-                    </span>
-                    {header.column.getIsSorted() === "asc" && (
-                      <TiArrowSortedDown size={20} />
-                    )}
-                    {header.column.getIsSorted() === "desc" && (
-                      <TiArrowSortedUp size={20} />
-                    )}
-                  </div>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row: Row<T>) => (
-            <tr
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              key={row.id}
-            >
-              {row.getVisibleCells().map((cell: Cell<T, unknown>) => (
-                <td className="px-6 py-3" key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                      {header.column.getIsSorted() === "desc" && (
+                        <TiArrowSortedUp size={20} />
+                      )}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row: Row<T>) => (
+              <tr
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                key={row.id}
+              >
+                {row.getVisibleCells().map((cell: Cell<T, unknown>) => (
+                  <td className="px-6 py-3" key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
