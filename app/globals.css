@@ -19,11 +19,6 @@ body {
   background-color: var(--background-color);
 }
 
-.react-grid-item > .react-resizable-handle.react-resizable-handle-se {
-  bottom: 20px !important;
-  right: 20px !important;
-}
-
 .react-grid-placeholder {
   border-radius: 12px;
   background-color: transparent !important;

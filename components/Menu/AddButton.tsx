@@ -18,7 +18,10 @@ const AddButton = ({ onClick }: AddButtonProps) => (
         <FaPlus size={20} />
       </button>
     </a>
-    <Tooltip id="add-button-tooltip" />
+    <Tooltip
+      style={{ backgroundColor: "#6366f1", color: "#fff" }}
+      id="add-button-tooltip"
+    />
   </div>
 );
 

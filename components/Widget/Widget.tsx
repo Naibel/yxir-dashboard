@@ -33,7 +33,7 @@ const Widget = ({ title, index, onRemove, children }: WidgetProps) => {
           data-tooltip-content="Supprimer ce widget"
         >
           <button
-            className="cursor-pointer z-50 text-indigo-600 cancelGrab bg-indigo-50 rounded-full p-1 shadow-indigo-100 hover:bg-indigo-200"
+            className="cursor-pointer z-50 duration-300 text-indigo-600 cancelGrab bg-indigo-50 rounded-full p-1 shadow-indigo-100 hover:bg-indigo-200"
             onClick={() => {
               onRemove(index);
             }}
@@ -46,7 +46,7 @@ const Widget = ({ title, index, onRemove, children }: WidgetProps) => {
           />
         </a>
       </div>
-      <div className="h-full px-5 pb-5 overflow-auto">{children}</div>
+      <div className="h-full px-5 pb-5">{children}</div>
     </div>
   );
 };
