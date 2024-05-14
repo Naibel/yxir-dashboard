@@ -1,7 +1,14 @@
 import { useMemo, useState } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 
-import { Chart, LayoutPlaceholder, Menu, Table, Widget } from "@/components";
+import {
+  Chart,
+  LayoutPlaceholder,
+  Menu,
+  ResizableHandle,
+  Table,
+  Widget,
+} from "@/components";
 import { useAlertStore } from "@/hooks";
 import {
   barChartConfig,
@@ -11,8 +18,6 @@ import {
 import { columnsData } from "@/mocks/columnsData";
 import mockData from "@/mocks/MOCK_DATA.json";
 import { ChartType, Cols, Item, LayoutType } from "@/types";
-
-const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const getComponent = (chart: ChartType) => {
   switch (chart) {
@@ -65,6 +70,9 @@ const GridLayout = ({
   rowHeight = 100,
   onLayoutChange,
 }: GridLayoutProps) => {
+  // Memoization to prevent rerendering and loss of the layout data
+  const ResponsiveGridLayout = useMemo(() => WidthProvider(Responsive), []);
+
   const { setAlertMessage } = useAlertStore();
 
   const [items, setItems] = useState<Item[]>([]);
@@ -72,20 +80,6 @@ const GridLayout = ({
   const [breakpoint, setBreakpoint] = useState();
   const [currentCols, setCurrentCols] = useState(0);
   const [layout, setLayout] = useState();
-
-  const createElement = (item: Item) => {
-    return (
-      <div key={item.i} data-grid={item}>
-        <Widget
-          title={chartData[item.type].title}
-          index={item.i}
-          onRemove={onRemoveItem}
-        >
-          {getComponent(item.type)}
-        </Widget>
-      </div>
-    );
-  };
 
   const onAddItem = (chart: ChartType) => {
     /*eslint no-console: 0*/
@@ -130,28 +124,41 @@ const GridLayout = ({
     setLayout(layout);
   };
 
-  const grids = useMemo(
-    () => items.map((item) => createElement(item)),
+  // Memoization des widgets afin de limiter les re-rendu de la grille uniquement lors de l'ajout/suppression de widgets
+  const widgets = useMemo(
+    () =>
+      items.map((item: Item) => (
+        <div key={item.i} data-grid={item}>
+          <Widget
+            title={chartData[item.type].title}
+            index={item.i}
+            onRemove={onRemoveItem}
+          >
+            {getComponent(item.type)}
+          </Widget>
+        </div>
+      )),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [newCounter]
   );
 
   return (
-    <div className={`p-4 md:p-10 ${grids.length === 0 ? `flex flex-1` : ""}`}>
+    <div className={widgets.length === 0 ? `flex flex-1` : ""}>
       <Menu onAddItem={onAddItem} />
-      {grids.length > 0 ? (
+      {widgets.length > 0 ? (
         <ResponsiveGridLayout
           margin={[20, 20]}
           containerPadding={[0, 0]}
           draggableHandle=".allowGrab"
           draggableCancel=".cancelGrab"
+          resizeHandle={<ResizableHandle />}
           onLayoutChange={onLayoutChangeHandler}
           onBreakpointChange={onBreakpointChange}
           className={className}
           cols={cols}
           rowHeight={rowHeight}
         >
-          {grids}
+          {widgets}
         </ResponsiveGridLayout>
       ) : (
         <LayoutPlaceholder />
