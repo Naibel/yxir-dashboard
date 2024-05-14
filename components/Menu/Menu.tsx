@@ -18,33 +18,34 @@ const Menu = ({ onAddItem }: { onAddItem: (type: ChartType) => void }) => {
       {isMenuDisplayed && (
         <div className="flex flex-col gap-2">
           <ChartButton
-            tooltipId={"chart-bar-button"}
-            tooltipText={"Diagramme à barres"}
+            tooltip={{ id: "chart-bar-button", content: "Diagramme à barre" }}
             onClick={() => handleAddButton("bar")}
-          >
-            <FaChartBar size={20} />
-          </ChartButton>
+            Icon={FaChartBar}
+          />
           <ChartButton
-            tooltipId={"chart-pie-button"}
-            tooltipText={"Diagramme à camenbert"}
+            tooltip={{
+              id: "chart-pie-button",
+              content: "Diagramme à camenbert",
+            }}
             onClick={() => handleAddButton("pie")}
-          >
-            <FaChartPie size={20} />
-          </ChartButton>
+            Icon={FaChartPie}
+          />
           <ChartButton
-            tooltipId={"chart-line-button"}
-            tooltipText={"Diagramme à ligne"}
+            tooltip={{
+              id: "chart-line-button",
+              content: "Diagramme à ligne",
+            }}
             onClick={() => handleAddButton("line")}
-          >
-            <FaChartLine size={20} />
-          </ChartButton>
+            Icon={FaChartLine}
+          />
           <ChartButton
+            tooltip={{
+              id: "table-button",
+              content: "Tableau",
+            }}
             onClick={() => handleAddButton("table")}
-            tooltipId={"table-button"}
-            tooltipText={"Tableau"}
-          >
-            <FaTable size={20} />
-          </ChartButton>
+            Icon={FaTable}
+          />
         </div>
       )}
       <AddButton
