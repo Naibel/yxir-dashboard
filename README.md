@@ -1,6 +1,6 @@
 # Yxir Dashboard
 
-[<img src="https://img.youtube.com/vi/iJvAiVqIcHY/hqdefault.jpg" width="50%">](https://youtu.be/iJvAiVqIcHY "Petit tour du projet et des features")
+[<img src="https://img.youtube.com/vi/iJvAiVqIcHY/hqdefault.jpg" width="90%">](https://youtu.be/iJvAiVqIcHY "Petit tour du projet et des features")
 
 Dans le cadre d'un test technique pour le compte de l'entreprise Yxir, j'ai été amené à réaliser l'excercice suivant : la mise d'une interface interactive et dynamique permettant aux utilisateurs de visualiser et d'analyser leurs données d'activité sur la plateforme. Ce projet se devait d'utiliser la librairie React et le framework NextJS.
 
