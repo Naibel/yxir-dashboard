@@ -4,15 +4,20 @@ import { FaChartBar, FaChartLine, FaChartPie, FaTable } from "react-icons/fa";
 import AddButton from "./AddButton";
 import ChartButton from "./ChartButton";
 
-import { ChartType } from "@/types";
+import { WidgetType } from "@/types";
 
-const Menu = ({ onAddItem }: { onAddItem: (type: ChartType) => void }) => {
+type MenuProps = {
+  onAddItem: (type: WidgetType) => void;
+};
+
+const Menu = ({ onAddItem }: MenuProps) => {
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false);
 
-  const handleAddButton = (type: ChartType) => {
+  const handleAddButton = (type: WidgetType) => {
     setIsMenuDisplayed((prevState) => !prevState);
     onAddItem(type);
   };
+
   return (
     <div className="fixed flex flex-col gap-2 bottom-10 right-10 z-40">
       {isMenuDisplayed && (
@@ -25,9 +30,9 @@ const Menu = ({ onAddItem }: { onAddItem: (type: ChartType) => void }) => {
           <ChartButton
             tooltip={{
               id: "chart-pie-button",
-              content: "Diagramme à camenbert",
+              content: "Diagramme en donut",
             }}
-            onClick={() => handleAddButton("pie")}
+            onClick={() => handleAddButton("donut")}
             Icon={FaChartPie}
           />
           <ChartButton

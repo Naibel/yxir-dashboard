@@ -12,7 +12,9 @@ export type Item = {
   y: number;
   w: number;
   h: number;
-  type: ChartType;
+  minW: number;
+  minH: number;
+  type: WidgetType;
 };
 
 export type LayoutType = {
@@ -23,7 +25,7 @@ export type LayoutType = {
   i: string;
 };
 
-export type ChartType = "pie" | "bar" | "line" | "table";
+export type WidgetType = "donut" | "bar" | "line" | "table";
 
 export type ColumnDef = {
   header: string;
