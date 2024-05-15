@@ -58,3 +58,4 @@ Ce projet utilise [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - Un problème d'overflow subsiste encore sur le tableau lorsque le widget est de trop petite taille.
 - Des erreurs "maximum call stack exceeded" se déclenchent arbitrairement lors du resize de la fenêtre.
 - Le layout du site peut parfois ne pas être retenu en mémoire correctement par le WidthProvider de react-grid-layout, ce qui peut parfois faire déplacer certains widgets.
+- Lors de l'ajout de nouveaux widgets, les graphiques ne prennent parfois que 60% de la largeur du widget. Lors d'un resize de la page ou du dit widget, le graphique est de nouveau à la bonne taille.
