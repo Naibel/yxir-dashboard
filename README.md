@@ -1,5 +1,7 @@
 # Yxir Dashboard
 
+[<img src="https://img.youtube.com/vi/iJvAiVqIcHY/hqdefault.jpg" width="50%">](https://youtu.be/iJvAiVqIcHY "Petit tour du projet et des features")
+
 Dans le cadre d'un test technique pour le compte de l'entreprise Yxir, j'ai été amené à réaliser l'excercice suivant : la mise d'une interface interactive et dynamique permettant aux utilisateurs de visualiser et d'analyser leurs données d'activité sur la plateforme. Ce projet se devait d'utiliser la librairie React et le framework NextJS.
 
 Lors de la création du projet, j'ai souhaité aussi intégrer Typescript (pour intégrer du typage statique renforcer la stabilité du projet) et TailwindCSS (afin de faciliter la mise en place du style du site).
@@ -24,13 +26,13 @@ Pour accomplir cette exercice, j'ai souhaité implementer des librairies connues
 
 Le projet contient :
 
-- Un dossier app qui contient les pages principales pour NextJS
+- Un dossier _app_ qui contient les pages principales pour NextJS
 - Un dossier components pour intègre les composants qui seront utilisés dans le projets (Widget, Chart, le menu, le tableau, etc.)
-- Un dossier hooks qui intègre les hooks qui nous seront utile, ici le hook useAlertStore, qui permet d'avoir accès au store zustand contenant les données de la fenêtre Alert et si oui ou non cette fenêtre doit être affichée.
-- Un dossier mocks qui rassemble l'ensemble des données mockées du tableau et les fichiers de configuration des différents graphiques (données à afficher, couleurs, échelles, etc.).
-- Un dossier providers qui intègre un hoc permettant l'affichage de la fenêtre d'alerting. Il s'agit d'une bonne pratique car cela permet d'utiliser ce composant sur l'ensemble des pages du site très aisément, si tant est que ce projet regroupe plus que la vue actuelle.
-- Un dossier types qui recense les déclarations des types qui sont utilisés sur plus d'un seul composant.
-- Un dossier views qui intègre les vues du site, ici la vue principale Dashboard, qui affiche les différents widgets.
+- Un dossier _hooks_ qui intègre les hooks qui nous seront utile, ici le hook useAlertStore, qui permet d'avoir accès au store zustand contenant les données de la fenêtre Alert et si oui ou non cette fenêtre doit être affichée.
+- Un dossier _mocks_ qui rassemble l'ensemble des données mockées du tableau et les fichiers de configuration des différents graphiques (données à afficher, couleurs, échelles, etc.).
+- Un dossier _providers_ qui intègre un hoc permettant l'affichage de la fenêtre d'alerting. Il s'agit d'une bonne pratique car cela permet d'utiliser ce composant sur l'ensemble des pages du site très aisément, si tant est que ce projet regroupe plus que la vue actuelle.
+- Un dossier _types_ qui recense les déclarations des types qui sont utilisés sur plus d'un seul composant.
+- Un dossier _views_ qui intègre les vues du site, ici la vue principale Dashboard, qui affiche les différents widgets.
 
 ## Comment lancer le projet
 
