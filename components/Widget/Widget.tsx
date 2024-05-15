@@ -16,7 +16,7 @@ const Widget = ({ title, index, onRemove, children }: WidgetProps) => {
     <div
       className={`flex flex-col box-sizing bg-white h-full shadow-indigo-200 rounded-xl ${
         isHeaderOnHover ? "shadow-lg opacity-50" : ""
-      } duration-300`}
+      } duration-300 overflow-hidden`}
     >
       <div
         onMouseEnter={() => setIsHeaderOnHover(true)}
@@ -46,7 +46,7 @@ const Widget = ({ title, index, onRemove, children }: WidgetProps) => {
           />
         </a>
       </div>
-      <div className="h-full px-5 pb-5 overflow-auto">{children}</div>
+      <div className="h-full px-5 pb-5">{children}</div>
     </div>
   );
 };

@@ -68,7 +68,7 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
 
   return (
     <div className="flex pt-4 gap-5 flex-col w-full">
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-2 items-stretch md:flex-row justify-between">
         <SearchBar
           value={filtering}
           onChange={(e) => {
@@ -114,7 +114,7 @@ export function Table<T>({ tableData, columnsData }: TableProps<T>) {
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header: Header<T, unknown>) => (
                   <th
-                    className="text-left px-6 py-3"
+                    className="text-left px-6 py-3 cursor-pointer"
                     key={header.id}
                     onClick={header.column.getToggleSortingHandler()}
                   >

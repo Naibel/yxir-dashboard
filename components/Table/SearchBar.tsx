@@ -7,14 +7,14 @@ type SearchBarProps = {
 };
 
 const SearchBar = ({ value, onChange }: SearchBarProps) => (
-  <div className="flex gap-2 border-2 rounded-full pl-2 pr-5 py-1">
+  <div className="flex relative gap-2">
     <IoSearchSharp
-      size={24}
+      size={22}
       color="#aaa"
-      className="duration-300 opacity-70 hover:opacity-100 cursor-pointer"
+      className="absolute left-2 top-1 duration-300 opacity-70 hover:opacity-100 cursor-pointer"
     />
     <input
-      className="bg-grey "
+      className="w-full ring-gray-900	ring-1 ring-inset focus:ring-indigo-600 pl-8 pr-5 py-1 rounded-full"
       type="text"
       placeholder="Rechercher dans le tableau"
       value={value}
