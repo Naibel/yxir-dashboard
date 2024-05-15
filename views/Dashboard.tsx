@@ -12,87 +12,79 @@ import {
 import { useAlertStore } from "@/hooks";
 import {
   barChartConfig,
+  donutChartConfig,
   lineChartConfig,
-  pieChartConfig,
 } from "@/mocks/chartConfigs";
 import { columnsData } from "@/mocks/columnsData";
 import mockData from "@/mocks/MOCK_DATA.json";
-import { ChartType, Cols, Item, LayoutType } from "@/types";
+import { Cols, Item, WidgetType } from "@/types";
 
-const getComponent = (chart: ChartType) => {
-  switch (chart) {
-    case "pie":
-      return <Chart config={pieChartConfig} />;
-    case "bar":
-      return <Chart config={barChartConfig} />;
-    case "line":
-      return <Chart config={lineChartConfig} />;
-    case "table":
-      return <Table tableData={mockData} columnsData={columnsData} />;
-    default:
-      return <div></div>;
-  }
-};
-
-const chartData = {
-  pie: {
-    title: "Diagramme en camenbert",
+const widgetData = {
+  donut: {
+    title: "Origine des défauts matériels",
+    component: <Chart config={donutChartConfig} />,
     w: 2,
     h: 3,
+    minW: 1,
+    minH: 2,
   },
   bar: {
-    title: "Diagramme en barres",
+    title: "Evolution des ventes (en millions d'€)",
+    component: <Chart config={barChartConfig} />,
     w: 3,
     h: 3,
+    minW: 2,
+    minH: 2,
   },
   line: {
-    title: "Diagramme en lignes",
+    title: "Evolution des commandes sur 2023",
+    component: <Chart config={lineChartConfig} />,
     w: 3,
     h: 3,
+    minW: 2,
+    minH: 2,
   },
   table: {
-    title: "Tableau",
+    title: "Inventaire des produits",
+    component: <Table tableData={mockData} columnsData={columnsData} />,
     w: 12,
     h: 5,
+    minW: 6,
+    minH: 5,
   },
 };
 
-type GridLayoutProps = {
+type DashboardProps = {
   className?: string;
   cols?: Cols;
   rowHeight?: number;
-  onLayoutChange?: (layout: LayoutType[]) => void;
 };
 
-const GridLayout = ({
+const Dashboard = ({
   className = "layout",
   cols = { lg: 8, md: 6, sm: 6, xs: 4, xxs: 2 },
   rowHeight = 100,
-  onLayoutChange,
-}: GridLayoutProps) => {
+}: DashboardProps) => {
   // Memoization to prevent rerendering and loss of the layout data
-  const ResponsiveGridLayout = useMemo(() => WidthProvider(Responsive), []);
+  const ResponsiveDashboard = useMemo(() => WidthProvider(Responsive), []);
 
   const { setAlertMessage } = useAlertStore();
 
   const [items, setItems] = useState<Item[]>([]);
   const [newCounter, setNewCounter] = useState(items.length);
-  const [breakpoint, setBreakpoint] = useState();
   const [currentCols, setCurrentCols] = useState(0);
-  const [layout, setLayout] = useState();
 
-  const onAddItem = (chart: ChartType) => {
-    /*eslint no-console: 0*/
-    console.log("adding", "n" + newCounter);
-
+  const onAddItem = (chart: WidgetType) => {
     if (newCounter < 10) {
       setItems((prevState: Item[]) => {
         const newEntry: Item = {
           i: "n" + newCounter,
           x: (prevState.length * 2) % (currentCols || 12),
           y: Infinity, // puts it at the bottom
-          w: chartData[chart].w,
-          h: chartData[chart].h,
+          w: widgetData[chart].w,
+          h: widgetData[chart].h,
+          minW: widgetData[chart].minW,
+          minH: widgetData[chart].minH,
           type: chart,
         };
         return [...prevState, newEntry];
@@ -108,20 +100,13 @@ const GridLayout = ({
   };
 
   const onRemoveItem = (i: string) => {
-    console.log("removing", i);
     setItems((prevItems) => prevItems.filter((item) => item.i !== i));
     setNewCounter((counter) => counter - 1);
   };
 
   // We're using the cols coming back from this to calculate where to add new items.
-  const onBreakpointChange = (breakpoint: any, cols: any) => {
-    setBreakpoint(breakpoint);
+  const onBreakpointChange = (breakpoint: string, cols: number) => {
     setCurrentCols(cols);
-  };
-
-  const onLayoutChangeHandler = (layout: any) => {
-    onLayoutChange && onLayoutChange(layout);
-    setLayout(layout);
   };
 
   // Memoization des widgets afin de limiter les re-rendu de la grille uniquement lors de l'ajout/suppression de widgets
@@ -130,11 +115,11 @@ const GridLayout = ({
       items.map((item: Item) => (
         <div key={item.i} data-grid={item}>
           <Widget
-            title={chartData[item.type].title}
+            title={widgetData[item.type].title}
             index={item.i}
             onRemove={onRemoveItem}
           >
-            {getComponent(item.type)}
+            {widgetData[item.type].component}
           </Widget>
         </div>
       )),
@@ -146,20 +131,19 @@ const GridLayout = ({
     <div className={widgets.length === 0 ? `flex flex-1` : ""}>
       <Menu onAddItem={onAddItem} />
       {widgets.length > 0 ? (
-        <ResponsiveGridLayout
+        <ResponsiveDashboard
           margin={[20, 20]}
           containerPadding={[0, 0]}
           draggableHandle=".allowGrab"
           draggableCancel=".cancelGrab"
           resizeHandle={<ResizableHandle />}
-          onLayoutChange={onLayoutChangeHandler}
           onBreakpointChange={onBreakpointChange}
           className={className}
           cols={cols}
           rowHeight={rowHeight}
         >
           {widgets}
-        </ResponsiveGridLayout>
+        </ResponsiveDashboard>
       ) : (
         <LayoutPlaceholder />
       )}
@@ -167,4 +151,4 @@ const GridLayout = ({
   );
 };
 
-export default GridLayout;
+export default Dashboard;
