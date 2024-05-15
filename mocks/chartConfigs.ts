@@ -7,8 +7,20 @@ export const barChartConfig: Props = {
   height: "100%",
   series: [
     {
-      name: "Sales",
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+      name: "France",
+      data: [80, 90, 300, 320, 500, 350, 200, 230, 500, 600],
+    },
+    {
+      name: "UK",
+      data: [100, 80, 200, 120, 300, 450, 130, 200, 300, 260],
+    },
+    {
+      name: "Allemagne",
+      data: [200, 170, 100, 220, 200, 150, 100, 80, 100, 110],
+    },
+    {
+      name: "Hors Europe",
+      data: [400, 270, 200, 250, 200, 300, 150, 280, 250, 200],
     },
   ],
   options: {
@@ -16,6 +28,7 @@ export const barChartConfig: Props = {
       toolbar: {
         show: false,
       },
+      stacked: true,
     },
     title: {
       text: "",
@@ -23,10 +36,10 @@ export const barChartConfig: Props = {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#020617"],
+    colors: ["#1e1b4b", "#a5b4fc", "#6366f1", "#312e81"],
     plotOptions: {
       bar: {
-        columnWidth: "40%",
+        columnWidth: "80%",
         borderRadius: 2,
       },
     },
@@ -46,15 +59,16 @@ export const barChartConfig: Props = {
         },
       },
       categories: [
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
       ],
     },
     yaxis: {
@@ -92,19 +106,23 @@ export const barChartConfig: Props = {
 
 // LINE CHART CONFIG
 export const lineChartConfig: Props = {
-  type: "line",
+  type: "area",
   height: "100%",
   width: "100%",
   series: [
     {
-      name: "Sales",
-      data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
+      name: "Commandes France",
+      data: [80, 160, 100, 50, 40, 300, 320, 500, 350, 200, 230, 500],
+    },
+    {
+      name: "Commandes E.U. (hors France)",
+      data: [400, 200, 140, 270, 400, 200, 120, 200, 250, 320, 230, 400],
     },
   ],
   options: {
     chart: {
       toolbar: {
-        show: false,
+        show: true,
       },
     },
     title: {
@@ -113,7 +131,7 @@ export const lineChartConfig: Props = {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#020617"],
+    colors: ["#6366f1", "#312e81"],
     stroke: {
       lineCap: "round",
       curve: "smooth",
@@ -137,12 +155,15 @@ export const lineChartConfig: Props = {
         },
       },
       categories: [
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
+        "Jan",
+        "Fev",
+        "Mar",
+        "Avril",
+        "Mai",
+        "Juin",
+        "Juil",
+        "Août",
+        "Sept",
         "Oct",
         "Nov",
         "Dec",
@@ -182,12 +203,18 @@ export const lineChartConfig: Props = {
 };
 
 // PIE CHART CONFIG
-export const pieChartConfig: Props = {
-  type: "pie",
+export const donutChartConfig: Props = {
+  type: "donut",
   width: "100%",
   height: "100%",
-  series: [44, 55, 13, 43, 22],
+  series: [44, 55, 23, 43],
   options: {
+    labels: [
+      "Défauts mécaniques",
+      "Défauts de dimensions",
+      "Défauts d'aspect",
+      "Coût de revient trop élevé",
+    ],
     chart: {
       toolbar: {
         show: false,
@@ -197,9 +224,12 @@ export const pieChartConfig: Props = {
       text: "",
     },
     dataLabels: {
-      enabled: false,
+      enabled: true,
+      formatter: function (val: number) {
+        return Math.round(val) + "%";
+      },
     },
-    colors: ["#020617", "#ff8f00", "#00897b", "#1e88e5", "#d81b60"],
+    colors: ["#312e81", "#4338ca", "#6366f1", "#a5b4fc"],
     legend: {
       show: false,
     },
