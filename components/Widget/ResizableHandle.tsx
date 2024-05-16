@@ -3,10 +3,12 @@ import { GrBottomCorner } from "react-icons/gr";
 import { Tooltip } from "react-tooltip";
 
 const ResizableHandle = forwardRef(function Component(props: any, ref) {
+  const { handleAxis, ...restProps } = props;
   return (
     <div
       ref={ref}
-      {...props}
+      handleaxis={handleAxis}
+      {...restProps}
       className="absolute z-50 opacity-30 hover:opacity-100 cursor-se-resize duration-300 right-4 bottom-4"
     >
       <a
